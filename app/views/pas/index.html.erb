@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pas.each do |pa| %>
+      <tr>
+        <td><%= pa.numero %></td>
+        <td><%= link_to 'Show', pa %></td>
+        <td><%= link_to 'Edit', edit_pa_path(pa) %></td>
+        <td><%= link_to 'Destroy', pa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pa', new_pa_path %>

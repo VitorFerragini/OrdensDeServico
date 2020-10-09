@@ -1,0 +1,33 @@
+<% if @ordens_de_servico.canceladas.any? %>
+
+  <h3>Canceladas</h3>
+
+  <table class="table table-striped table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th>Número</th>
+        <th>Data de emissão</th>
+        <th>Área demandante</th>
+        <th>Sistema</th>
+        <th>Data de entrega</th>
+        <th>Fase</th>
+        <th>Título</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @ordens_de_servico.canceladas.each do |cancelada| %>
+        <tr>
+          <th scope="row"><%= link_to cancelada.numero, edit_ordem_de_servico_path(cancelada), class: "nav-link" %></th>
+          <td><%= l cancelada.data_emissao, default: '' %></td>
+          <td><%= cancelada.area.descricao if cancelada.area %></td>
+          <td><%= cancelada.sistema.nome if cancelada.sistema %></td>
+          <td><%= l cancelada.data_entrega, default: '' %></td>
+          <td><%= cancelada.fase.nome %></td>
+          <td><%= cancelada.titulo %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+
+<% end %>

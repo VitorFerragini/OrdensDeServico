@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Gestão de OS</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">Gestão de OS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/ordens_de_servico">Ordens de Serviço</a>
+            </li>
+          </ul>
+          <div class="navbar-text float-right">
+            <% if user_signed_in? %>
+              Usuário: <strong><%= current_user.username %></strong> | RF: <strong><%= current_user.rf %></strong> |
+              <%= link_to "Perfil", edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+            <% else %>
+              <%= link_to "Registrar-se", new_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div id="notice" class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div id="alert" class="alert alert-danger" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+  
+    <div class='container'>
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<%= form_with(model: coordenadoria, local: true) do |form| %>
+  <% if coordenadoria.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coordenadoria.errors.count, "error") %> prohibited this coordenadoria from being saved:</h2>
+
+      <ul>
+        <% coordenadoria.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :descricao %>
+    <%= form.text_field :descricao %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

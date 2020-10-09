@@ -1,0 +1,2 @@
+class Sistema < ApplicationRecord
+end

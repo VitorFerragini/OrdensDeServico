@@ -1,0 +1,8 @@
+
+<h1>Editar Ordem de Serviço</h1>
+
+<%= render 'form', ordem_de_servico: @ordem_de_servico %>
+
+<%= link_to 'Visualizar', @ordem_de_servico, class: 'btn btn-primary' %>
+<%= link_to 'Apagar', @ordem_de_servico, method: :delete, data: { confirm: 'Tem certeza de que deseja apagar a OS permanentemente?' }, class: 'btn btn-danger' %>
+<%= link_to 'Voltar', ordens_de_servico_path, class: 'btn btn-secondary' %>

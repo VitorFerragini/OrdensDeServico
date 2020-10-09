@@ -1,0 +1,70 @@
+<br>
+<h2>Editar Perfil</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :rf, 'RF' %><br />
+    <%= f.text_field :rf, autofocus: true, autocomplete: "rf" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username, 'Nome' %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password, 'Nova senha' %> <i>(deixe em branco se não quiser alterar)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em>mínimo de <%= @minimum_password_length %> caracteres</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, 'Confirme a nova senha' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, 'Senha atual' %> <i>(precisamos da sua senha atual para confirmar as alterações)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Atualizar" %>
+  </div>
+<% end %>
+
+<br>
+<h3>Usuários</h3>
+
+<p>Perfis atualmente permissionados no sistema:</p>
+<ul>
+<% User.all.each do |usuario| %>
+  <li><strong><%= usuario.username %></strong>, RF <strong><%= usuario.rf %></strong>, e-mail: <%= usuario.email %></li>
+<% end %>
+</ul>
+
+<br>
+<h3>Criar novo usuário</h3>
+
+<p>Cadastrar um novo perfil para acessar o sistema: <%= button_to "Cadastrar novo usuário", new_user_registration_path, data: nil, method: :get %></p>
+
+<br>
+<h3>Cancelar minha conta</h3>
+
+<p>Se quiser apagar seu perfil, clique no botão abaixo <%= button_to "Deletar perfil", registration_path(resource_name), data: { confirm: "Tem certeza de que deseja excluir sua conta?" }, method: :delete %></p>
+
+<%= link_to "Voltar", :back %>

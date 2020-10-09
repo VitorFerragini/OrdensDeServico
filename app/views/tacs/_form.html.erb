@@ -1,0 +1,22 @@
+<%= form_with(model: tac, local: true) do |form| %>
+  <% if tac.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tac.errors.count, "error") %> prohibited this tac from being saved:</h2>
+
+      <ul>
+        <% tac.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :numero %>
+    <%= form.text_field :numero %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

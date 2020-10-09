@@ -1,0 +1,33 @@
+<% if @ordens_de_servico.encerradas.any? %>
+
+  <h3>Encerradas</h3>
+
+  <table class="table table-striped table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th>Número</th>
+        <th>Data de emissão</th>
+        <th>Área demandante</th>
+        <th>Sistema</th>
+        <th>Data de entrega</th>
+        <th>Fase</th>
+        <th>Título</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @ordens_de_servico.encerradas.each do |encerrada| %>
+        <tr>
+          <th scope="row"><%= link_to encerrada.numero, edit_ordem_de_servico_path(encerrada), class: "nav-link" %></th>
+          <td><%= l encerrada.data_emissao, default: '' %></td>
+          <td><%= encerrada.area.descricao if encerrada.area %></td>
+          <td><%= encerrada.sistema.nome if encerrada.sistema %></td>
+          <td><%= l encerrada.data_entrega, default: '' %></td>
+          <td><%= encerrada.fase.nome %></td>
+          <td><%= encerrada.titulo %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+
+<% end %>

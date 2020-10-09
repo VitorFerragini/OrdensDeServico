@@ -1,0 +1,177 @@
+<%= form_with(model: ordem_de_servico, local: true) do |form| %>
+  <% if ordem_de_servico.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ordem_de_servico.errors.count, "erro") %> impediu a ordem de serviço de ser salva:</h2>
+
+      <ul>
+        <% ordem_de_servico.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container border rounded p-3 mb-3 bg-light">
+    <div class="form-row">
+      <div class="field form-group col-md-5">
+        <%= form.label :numero %>
+        <%= form.text_field :numero, class: 'form-control' %>
+        <small class="form-text text-muted">Número da Ordem de Serviço</small>
+      </div>
+    
+      <div class="field form-group col-md-3">
+        <%= form.label :pa_id, 'PA' %>
+        <%= form.collection_select :pa_id, Pa.all, :id, :numero, {}, { class: 'form-control' } %>
+        <small class="form-text text-muted">Processo Administrativo</small>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :tc_id, 'TC' %>
+        <%= form.collection_select :tc_id, Tc.all, :id, :numero, {}, { class: 'form-control' } %>
+        <small class="form-text text-muted">Termo de Contrato</small>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :tac_id, 'TAC' %>
+        <%= form.collection_select :tac_id, Tac.all, :id, :numero, {}, { class: 'form-control' } %>
+        <small class="form-text text-muted">Termo Aditivo de Contrato</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="container border rounded p-3 mb-3 bg-light">
+    <div class="form-row">
+      <div class="field form-group col-md-2">
+        <%= form.label :data_emissao %>
+        <%= form.text_field :data_emissao, { type: 'date', max: Date.today, class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-5">
+        <%= form.label :responsavel %>
+        <%= form.text_field :responsavel, class: 'form-control' %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :coordenadoria_id %>
+        <%= form.collection_select :coordenadoria_id, Coordenadoria.all, :id, :descricao, { prompt: '' }, { class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-3">
+        <%= form.label :area_id, 'Área demandante' %>
+        <%= form.collection_select :area_id, Area.all, :id, :descricao, { prompt: '' }, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container border rounded p-3 mb-3 bg-light">
+    <div class="form-row">
+      <div class="field form-group col-md-5">
+        <%= form.label :tipo_id %>
+        <%= form.collection_select :tipo_id, Tipo.all, :id, :nome, { prompt: '' }, { class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-7">
+        <%= form.label :sistema_id %>
+        <%= form.collection_select :sistema_id, Sistema.all, :id, :nome, { prompt: '' }, { class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-12">
+        <%= form.label :fase_id %>
+        <%= form.collection_select :fase_id, Fase.all, :id, :nome, {}, { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="field form-group form-check">
+      <%= form.check_box :emergencial, class: 'form-check-input' %>
+      <%= form.label :emergencial, class: 'form-check-label' %>
+    </div>
+  </div>
+
+  <div class="container border rounded p-3 mb-3 bg-light">
+    <div class="form-row">
+      <div class="field form-group col-md-2">
+        <%= form.label :data_necessidade %>
+        <%= form.text_field :data_necessidade, { type: 'date', class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :data_entrega %>
+        <%= form.text_field :data_entrega, { type: 'date', max: Date.today, class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :data_aceite %>
+        <%= form.text_field :data_aceite, { type: 'date', max: Date.today, class: 'form-control' } %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :esforco_estimado %>
+        <%= form.text_field :esforco_estimado, class: 'form-control' %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :esforco_realizado %>
+        <%= form.text_field :esforco_realizado, class: 'form-control' %>
+      </div>
+    
+      <div class="field form-group col-md-2">
+        <%= form.label :fatura, 'Fatura', { 'data-toggle': "tooltip", 'data-placement': "top", title: "Se houver data de entrega e o mês/ano da fatura não forem preenchidos, o sistema preencherá automaticamente de acordo com a regra definida." } %>
+        <%= form.date_select :fatura, { discard_day: true, prompt: '' }, { class: 'mb-1 form-control' } %>
+      </div>
+    </div>
+  
+    <% if @ordem_de_servico.esforco_relacionamento.present? || @ordem_de_servico.total_esforco.present? %>
+      <div class="form-row">
+        <div class="field form-group col-md-6">
+        </div>
+      
+        <div class="field form-group col-md-2">
+          <%= form.label :esforco_relacionamento, 'Esforço relacionamento' %>
+          <%= form.text_field :esforco_relacionamento, class: 'form-control' %>
+          <small class="form-text text-muted">Campo descontinuado</small>
+        </div>
+      
+        <div class="field form-group col-md-2">
+          <%= form.label :total_esforco, 'Esforço total' %>
+          <%= form.text_field :total_esforco, class: 'form-control' %>
+          <small class="form-text text-muted">Campo descontinuado</small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="container border rounded p-3 mb-3 bg-light">
+    <div class="field form-row">
+      <div class="field form-group col-md-12">
+        <%= form.label :titulo %>
+        <%= form.text_field :titulo, class: 'form-control' %>
+      </div>
+    
+      <div class="field form-group col-md-12">
+        <%= form.label :solicitacao %>
+        <%= form.text_area :solicitacao, rows: 10, class: 'form-control' %>
+      </div>
+    
+      <div class="field form-group col-md-12">
+        <%= form.label :obs %>
+        <%= form.text_field :obs, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <% if @ordem_de_servico.ss.present? %>
+    <div class="container border rounded p-3 mb-3 bg-light">
+      <div class="field form-row">
+        <div class="field form-group col-md-12">
+          <%= form.label :ss, 'SS' %>
+          <%= form.text_field :ss, class: 'form-control' %>
+          <small class="form-text text-muted">Campo descontinuado</small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

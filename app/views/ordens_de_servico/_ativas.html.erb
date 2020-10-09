@@ -1,0 +1,47 @@
+<% if @ordens_de_servico.ativas.any? %>
+
+  <h3>Ativas</h3>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th>Número</th>
+        <!--<th>PA / TC / TAC</th>-->
+        <th>Data de emissão</th>
+        <th>Área demandante</th>
+        <!--<th>Responsável</th>-->
+        <th>Emergencial?</th>
+        <!--<th>Tipo</th>-->
+        <th>Sistema</th>
+        <!--<th>Data da necessidade</th>-->
+        <!--<th>Data de entrega</th>-->
+        <!--<th>Esforço estimado</th>-->
+        <th>Fase</th>
+        <!--<th>Fatura</th>-->
+        <!--<th>Esforço realizado</th>-->
+        <!--<th>Data de aceite</th>-->
+        <!--<th>Observações</th>-->
+        <th>Título</th>
+        <!--<th colspan="3"></th>-->
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @ordens_de_servico.ativas.each do |ordem_de_servico| %>
+        <tr>
+          <th scope="row"><%= link_to ordem_de_servico.numero, edit_ordem_de_servico_path(ordem_de_servico), class: "nav-link" %></th>
+          <td><%= l ordem_de_servico.data_emissao, default: '' %></td>
+          <td><%= ordem_de_servico.area.descricao if ordem_de_servico.area %></td>
+          <td><%= ordem_de_servico.emergencial ? 'Sim' : 'Não' %></td>
+          <td><%= ordem_de_servico.sistema.nome if ordem_de_servico.sistema %></td>
+          <td><%= ordem_de_servico.fase.nome %></td>
+          <td><%= ordem_de_servico.titulo %></td>
+          <!--<td><%= link_to 'Show', ordem_de_servico %></td>-->
+          <!--<td><%= link_to 'Edit', edit_ordem_de_servico_path(ordem_de_servico) %></td>-->
+          <!--<td><%= link_to 'Destroy', ordem_de_servico, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+
+<% end %>

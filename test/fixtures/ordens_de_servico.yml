@@ -1,0 +1,45 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero: MyString
+  pa: one
+  tc: one
+  tac: one
+  data_emissao: 2020-08-28
+  coordenadoria: one
+  area: one
+  responsavel: MyString
+  emergencial: false
+  tipo: one
+  sistema: one
+  data_necessidade: 2020-08-28
+  data_entrega: 2020-08-28
+  esforco_estimado: 9.99
+  fase: one
+  fatura: 2020-08-28
+  esforco_realizado: 9.99
+  data_aceite: 2020-08-28
+  obs: MyString
+  solicitacao: MyText
+
+two:
+  numero: MyString
+  pa: two
+  tc: two
+  tac: two
+  data_emissao: 2020-08-28
+  coordenadoria: two
+  area: two
+  responsavel: MyString
+  emergencial: false
+  tipo: two
+  sistema: two
+  data_necessidade: 2020-08-28
+  data_entrega: 2020-08-28
+  esforco_estimado: 9.99
+  fase: two
+  fatura: 2020-08-28
+  esforco_realizado: 9.99
+  data_aceite: 2020-08-28
+  obs: MyString
+  solicitacao: MyText

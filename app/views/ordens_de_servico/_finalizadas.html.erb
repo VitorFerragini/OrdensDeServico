@@ -1,0 +1,33 @@
+<% if @ordens_de_servico.finalizadas.any? %>
+
+  <h3>Finalizadas <span class="badge badge-dark"><%= @ordens_de_servico.finalizadas.count %></span></h3>
+
+  <table class="table table-striped table-info">
+    <thead class="thead-light">
+      <tr>
+        <th>Número</th>
+        <th>Data de emissão</th>
+        <th>Área demandante</th>
+        <th>Sistema</th>
+        <th>Data de entrega</th>
+        <th>Título</th>
+        <th>Horas</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @ordens_de_servico.finalizadas.each do |finalizada| %>
+        <tr>
+          <th scope="row"><%= link_to finalizada.numero, edit_ordem_de_servico_path(finalizada), class: "nav-link" %></th>
+          <td><%= l finalizada.data_emissao, default: '' %></td>
+          <td><%= finalizada.area.descricao if finalizada.area %></td>
+          <td><%= finalizada.sistema.nome if finalizada.sistema %></td>
+          <td><%= l finalizada.data_entrega, default: '' %></td>
+          <td><%= finalizada.titulo %></td>
+          <td><%= finalizada.horas_faturaveis %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+
+<% end %>

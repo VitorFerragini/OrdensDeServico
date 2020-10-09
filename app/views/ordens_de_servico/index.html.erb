@@ -1,0 +1,38 @@
+<h1><%= link_to 'Ordens de Serviço', ordens_de_servico_path, class: 'text-reset text-decoration-none' %></h1>
+
+<div class="container p-1">
+  <%= form_tag ordens_de_servico_path, method: :get do %>
+    <div class="form-row">
+      <div class="field form-group col-md-4">
+        <%= link_to 'Criar nova Ordem de Serviço', new_ordem_de_servico_path, class: "btn btn-primary" %>
+      </div>
+      <div class="field form-group col-md-2">
+        <%= search_field_tag :busca, params[:busca], { class: 'form-control' } %>
+        <%= label_tag :busca, 'Busca por código da OS' %>
+      </div>
+      <div class="field form-group col-md-2">
+        <%= submit_tag "Buscar", name: nil, class: 'btn btn-primary' %>
+      </div>
+      <div class="field form-group col-md-3">
+        <%= select_tag :fatura, options_from_collection_for_select(OrdemDeServico.faturas, :fatura, :l_fatura, params[:fatura]), prompt: '', class: 'form-control' %>
+        <%= label_tag :fatura, 'Busca por mês da fatura' %>
+      </div>
+      <div class="field form-group col-md-1">
+        <%= submit_tag "Buscar", name: nil, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if params[:fatura].present? %>
+  <h2>Fatura de <%= l(params[:fatura].to_date, format: :long_fatura) %></h2>
+  <br>
+  <h4>Total de horas faturáveis: <span class="badge badge-info"><%= OrdemDeServico.soma_fatura(params[:fatura].to_date) %></span></h4>
+  <br>
+  <%= render 'finalizadas' %>
+  <%= render 'canceladas' %>
+  <%= render 'ativas' %>
+<% else %>
+  <%= render 'ativas' %>
+  <%= render 'encerradas' %>
+<% end %>

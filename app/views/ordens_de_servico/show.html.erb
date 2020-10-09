@@ -1,0 +1,108 @@
+
+<p>
+  <strong>Número:</strong>
+  <%= @ordem_de_servico.numero %>
+</p>
+
+<p>
+  <strong>PA:</strong>
+  <%= @ordem_de_servico.pa.numero %>
+</p>
+
+<p>
+  <strong>TC:</strong>
+  <%= @ordem_de_servico.tc.numero %>
+</p>
+
+<p>
+  <strong>TAC:</strong>
+  <%= @ordem_de_servico.tac.numero %>
+</p>
+
+<p>
+  <strong>Data de emissão:</strong>
+  <%= l @ordem_de_servico.data_emissao, default: '' %>
+</p>
+
+<p>
+  <strong>Coordenadoria:</strong>
+  <%= @ordem_de_servico.coordenadoria.descricao if @ordem_de_servico.coordenadoria %>
+</p>
+
+<p>
+  <strong>Área:</strong>
+  <%= @ordem_de_servico.area.descricao if @ordem_de_servico.area %>
+</p>
+
+<p>
+  <strong>Responsável:</strong>
+  <%= @ordem_de_servico.responsavel %>
+</p>
+
+<p>
+  <strong>Emergencial:</strong>
+  <%= @ordem_de_servico.emergencial ? 'Sim' : 'Não' %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @ordem_de_servico.tipo.nome if @ordem_de_servico.tipo %>
+</p>
+
+<p>
+  <strong>Sistema:</strong>
+  <%= @ordem_de_servico.sistema.nome if @ordem_de_servico.sistema %>
+</p>
+
+<p>
+  <strong>Data da necessidade:</strong>
+  <%= l @ordem_de_servico.data_necessidade, default: '' %>
+</p>
+
+<p>
+  <strong>Data de entrega:</strong>
+  <%= l @ordem_de_servico.data_entrega, default: '' %>
+</p>
+
+<p>
+  <strong>Esforço estimado:</strong>
+  <%= @ordem_de_servico.esforco_estimado %> horas
+</p>
+
+<p>
+  <strong>Fase:</strong>
+  <%= @ordem_de_servico.fase.nome %>
+</p>
+
+<p>
+  <strong>Fatura:</strong>
+  <%= l @ordem_de_servico.fatura, default: '' %>
+</p>
+
+<p>
+  <strong>Esforço realizado:</strong>
+  <%= @ordem_de_servico.esforco_realizado %> horas
+</p>
+
+<p>
+  <strong>Data de aceite:</strong>
+  <%= l @ordem_de_servico.data_aceite, default: '' %>
+</p>
+
+<p>
+  <strong>Observações:</strong>
+  <%= @ordem_de_servico.obs %>
+</p>
+
+<p>
+  <strong>Solicitação:</strong>
+  <%= @ordem_de_servico.solicitacao %>
+</p>
+
+<p>
+  <strong>Título:</strong>
+  <%= @ordem_de_servico.titulo %>
+</p>
+
+<%= link_to 'Editar', edit_ordem_de_servico_path(@ordem_de_servico) %> |
+<%= link_to 'Voltar', ordens_de_servico_path %>
