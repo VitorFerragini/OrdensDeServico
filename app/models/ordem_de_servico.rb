@@ -46,11 +46,11 @@ class OrdemDeServico < ApplicationRecord
   private
     # Regra de Negócio
     # - Se o mês e ano da fatura não forem especificados:
-    # --- Se a data de entrega for até o dia 20 do mês, entra para a fatura do mês;
-    # --- Se a data de entrega for a partir do dia 21, entra para a fatura do mês seguinte.
+    # --- Se a data de aceite for até o dia 20 do mês, entra para a fatura do mês;
+    # --- Se a data de aceite for a partir do dia 21, entra para a fatura do mês seguinte.
     def calcular_mes_da_fatura
-      if data_entrega && fatura.nil?
-        if data_entrega.day <= 20
+      if data_aceite && fatura.nil?
+        if data_aceite.day <= 20
           self.fatura = data_entrega.beginning_of_month
         else
           self.fatura = data_entrega.end_of_month + 1.day
